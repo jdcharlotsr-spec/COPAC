@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The City of Praise | Bishop J. D. Charlot, Sr.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;900&family=Lora:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --accent-navy: #0A192F;
+            --brushed-gold: #C5A021;
+            --soft-ivory: #FDFCFB;
+            --pure-white: #FFFFFF;
+            --text-main: #2A2A2A;
+            --rounded-lg: 50px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--soft-ivory);
+            color: var(--text-main);
+            line-height: 1.8;
+        }
+
+        h1, h2, h3 { font-family: 'Cinzel', serif; font-weight: 700; }
+
+        /* --- CENTERED HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 90px;
+            background: var(--pure-white);
+            border-bottom: 3px solid var(--brushed-gold);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            width: 90%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+        }
+
+        .nav-links { list-style: none; display: flex; gap: 35px; }
+        .nav-links.left { justify-content: flex-end; padding-right: 60px; }
+        .nav-links.right { justify-content: flex-start; padding-left: 60px; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--accent-navy);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--brushed-gold); }
+
+        .logo-seal {
+            width: 140px;
+            height: 140px;
+            background: var(--pure-white);
+            border-radius: 50%;
+            border: 4px solid var(--brushed-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            top: 25px; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            z-index: 2001;
+            font-family: 'Cinzel';
+            font-weight: 900;
+            text-align: center;
+            color: var(--accent-navy);
+            font-size: 1rem;
+            line-height: 1.1;
+        }
+
+        /* --- HERO --- */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.4)), 
+                        url('https://images.unsplash.com/photo-1544427920-c49ccfb85579?q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 10% 0;
+        }
+
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); color: var(--accent-navy); margin-bottom: 20px; }
+        .hero p { font-family: 'Lora', serif; font-style: italic; font-size: 1.6rem; color: var(--brushed-gold); }
+
+        /* --- SIDE BY SIDE LEADERSHIP --- */
+        .leadership-section { padding: 120px 5%; background: var(--pure-white); }
+        .leader-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .leader-card {
+            background: var(--soft-ivory);
+            padding: 50px;
+            border-radius: 30px;
+            border: 1px solid #eee;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .leader-img-small {
+            width: 160px;
+            height: 160px;
+            background: #eee;
+            border-radius: 50%;
+            margin-bottom: 25px;
+            border: 4px solid var(--brushed-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: #999;
+            overflow: hidden;
+        }
+
+        .leader-card h3 { font-size: 2rem; color: var(--accent-navy); margin-bottom: 5px; }
+        .leader-card b { display: block; color: var(--brushed-gold); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 20px; }
+        .leader-card p { font-size: 0.95rem; text-align: left; }
+
+        /* --- FULL BELIEFS (DYNAMIC SQUARES) --- */
+        .beliefs-section { background: var(--accent-navy); color: var(--pure-white); padding: 120px 8%; }
+        .belief-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 60px;
+        }
+
+        .belief-item {
+            background: rgba(255,255,255,0.05);
+            padding: 45px;
+            border-radius: 30px;
+            border: 1px solid rgba(197, 160, 33, 0.3);
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .belief-item:hover { border-color: var(--brushed-gold); background: rgba(255,255,255,0.08); transform: translateY(-5px); }
+        .belief-item h3 { font-family: 'Cinzel', serif; color: var(--brushed-gold); margin-bottom: 15px; font-size: 1.4rem; }
+        .belief-item p { font-size: 0.9rem; line-height: 1.6; }
+        .scripture { display: block; margin-top: 20px; color: var(--brushed-gold); font-style: italic; font-weight: 600; font-size: 0.85rem; }
+
+        /* --- GATHERING & REGISTRATION --- */
+        .gather-section { padding: 120px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .reg-form { background: var(--pure-white); padding: 60px; border-radius: var(--rounded-lg); box-shadow: 0 30px 60px rgba(0,0,0,0.05); }
+        .reg-form h3 { font-size: 1.8rem; margin-bottom: 20px; }
+        .reg-form input { width: 100%; padding: 15px 25px; border-radius: 30px; border: 1px solid #ddd; margin-bottom: 15px; font-family: inherit; }
+        .reg-form button { width: 100%; padding: 15px; border-radius: 30px; background: var(--accent-navy); color: white; border: none; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: 0.3s; }
+        .reg-form button:hover { background: var(--brushed-gold); }
+
+        footer { text-align: center; padding: 80px 10%; background: var(--soft-ivory); border-top: 1px solid #eee; }
+
+        @media (max-width: 1000px) {
+            .nav-container { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .logo-seal { position: relative; top: 0; transform: none; margin: 10px auto; width: 110px; height: 110px; }
+            .leader-row, .gather-section { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <ul class="nav-links left">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#leadership">Leadership</a></li>
+            </ul>
+            
+            <div class="logo-seal">
+                COPAC<br><span style="font-size: 0.5rem; letter-spacing: 1px;">THE CITY<br>OF PRAISE</span>
+            </div>
+
+            <ul class="nav-links right">
+                <li><a href="#beliefs">Beliefs</a></li>
+                <li><a href="#gathering">Join Us</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <h2 style="font-family:'Montserrat'; letter-spacing:4px; text-transform:uppercase; font-size:0.8rem; margin-bottom:15px; color:var(--brushed-gold);">The City of Praise Apostolic Church Ministries, Inc.</h2>
+        <h1>"Let There Be Praise <br>In This House!"</h1>
+        <p>A Sanctuary for Restoration & Apostolic Joy.</p>
+    </section>
+
+    <section class="leadership-section" id="leadership">
+        <div class="leader-row">
+            <div class="leader-card">
+                <div class="leader-img-small">LOGO</div>
+                <b>Founder & Pastor</b>
+                <h3>Bishop J. D. Charlot, Sr.</h3>
+                <p>Bishop J. D. Charlot, Sr. is the Founder and Pastor of City of Praise Apostolic Church Ministries and has been preaching the Gospel since the age of five, answering an early and enduring call to ministry. He serves faithfully alongside his wife and partner in life and ministry, Lady Latosha Charlot, and is the proud father of two children. Bishop Charlot holds a Bachelor of Science in Organizational Leadership from Texas A&M University–Commerce and is currently pursuing the Master of Divinity degree at Duke University. Rooted in the Apostolic and Pentecostal tradition, his ministry emphasizes sound doctrine, Spirit-led worship, intentional discipleship, and community impact, with a heart to glorify God while equipping believers to live out their faith with purpose and integrity.</p>
+            </div>
+
+            <div class="leader-card">
+                <div class="leader-img-small">LOGO</div>
+                <b>Executive Pastor</b>
+                <h3>Lady Latosha Charlot</h3>
+                <p>Lady Latosha Charlot is a fourth-generation Pentecostal preacher, prophetess, and devoted servant of God, known for her passion for holy living and Spirit-led ministry. She serves faithfully alongside her husband, Bishop J. D. Charlot, Sr., as his wife and partner in life and ministry, and is a doting and intentional mother. Lady Charlot holds a Bachelor’s degree in Health Administration, bringing both compassion and practical insight to her work. With a heart for the underserved and marginalized, her ministry is marked by prophetic clarity, pastoral sensitivity, and a deep commitment to empowering individuals and families to walk in wholeness, dignity, and purpose through Christ.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="beliefs-section" id="beliefs">
+        <h2 style="text-align: center; font-size: 2.5rem;">Sacred Beliefs</h2>
+        <div class="belief-grid">
+            
+            <div class="belief-item">
+                <h3>The Godhead</h3>
+                <p>We believe in the absolute Oneness of God—the one true and living God, who was manifested in the flesh as Jesus Christ. He is the Father in creation, the Son in redemption, and the Holy Ghost in emanation.</p>
+                <span class="scripture">Isaiah 9:6, Colossians 2:9</span>
+            </div>
+
+            <div class="belief-item">
+                <h3>Water Baptism</h3>
+                <p>Baptism is more than a ceremony; it is a burial. We baptize by total immersion in the Name of the Lord Jesus Christ for the remission of sins, following the pattern of the New Testament Church.</p>
+                <span class="scripture">Acts 2:38, Romans 6:4</span>
+            </div>
+
+            <div class="belief-item">
+                <h3>Salvation</h3>
+                <p>The full New Testament experience: Repentance from sin, Water Baptism in Jesus' Name, and the Infilling of the Holy Ghost with the initial evidence of speaking in tongues.</p>
+                <span class="scripture">John 3:5, Acts 19:1-6</span>
+            </div>
+
+            <div class="belief-item">
+                <h3>Christian Liberty</h3>
+                <p>While firm in our Apostolic beliefs, we are non-sectarian. We fellowship ecumenically with all who proclaim Jesus as the only saving Name, honoring the diversity of the Body of Christ.</p>
+                <span class="scripture">Galatians 5:1, Acts 4:12</span>
+            </div>
+
+            <div class="belief-item">
+                <h3>Communion</h3>
+                <p>We offer both wine and grape juice. Communion is observed at least four times throughout the year specifically when our monthly gathering falls on a First Sunday.</p>
+                <span class="scripture">1 Corinthians 11:23-26</span>
+            </div>
+
+            <div class="belief-item">
+                <h3>Prayer & Intercession</h3>
+                <p>We believe in fervent, effectual intercession. Prayer is our primary weapon of warfare and our direct line of communion. We believe that prayer shifts atmospheres and changes lives.</p>
+                <span class="scripture">James 5:16, 2 Chronicles 7:14</span>
+            </div>
+
+            <div class="belief-item">
+                <h3>Headcoverings</h3>
+                <p>Following 1 Corinthians 11 as a sign of spiritual order, we acknowledge the biblical significance of this practice. However, we leave the observation to the personal conviction of the individual believer.</p>
+                <span class="scripture">1 Corinthians 11:1-16</span>
+            </div>
+
+            <div class="belief-item">
+                <h3>Holy Living</h3>
+                <p>A heart-felt desire to reflect the character of Christ. We are called to be set apart in our conduct, our dress, and our spirits for His glory.</p>
+                <span class="scripture">Hebrews 12:14, 1 Peter 1:16</span>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="gather-section" id="gathering">
+        <div>
+            <h2 style="font-size: 2.5rem; color: var(--accent-navy); margin-bottom: 20px;">Join The Gathering</h2>
+            <p style="font-family:'Lora'; font-style:italic; font-size:1.4rem; color:var(--brushed-gold); margin-bottom:20px;">"And there was Joy in the City!"</p>
+            <p style="margin-bottom: 30px;">"Walking, Leaping, and Praising God!" Join us as we build a kingdom community focused on authenticity and restoration.</p>
+            <div style="border-left: 4px solid var(--brushed-gold); padding-left: 20px;">
+                <b>Monthly In-Person:</b> Sundays [DATE TBD]<br>
+                <b>Weekly Teleconference:</b> Thursdays @ 8:00 PM CST
+            </div>
+        </div>
+        <div class="reg-form">
+            <h3 style="color: var(--accent-navy);">Teleconference Invite</h3>
+            <p style="margin-bottom: 20px; font-size: 0.9rem; color: #666;">Register to receive weekly dial-in credentials.</p>
+            <form>
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <button type="submit">Send My Invitation</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <h2 style="color: var(--accent-navy); margin-bottom: 10px;">COPAC</h2>
+        <p>The City of Praise Apostolic Church Ministries, Inc.</p>
+        <p style="margin-top: 30px; font-size: 0.75rem; opacity: 0.5;">Led by Bishop J. D. Charlot, Sr. | A Kingdom Community | &copy; 2026</p>
+    </footer>
+
+</body>
+</html>
