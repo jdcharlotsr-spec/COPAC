@@ -76,13 +76,10 @@
             top: 25px; 
             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
             z-index: 2001;
-            font-family: 'Cinzel';
-            font-weight: 900;
-            text-align: center;
-            color: var(--accent-navy);
-            font-size: 1rem;
-            line-height: 1.1;
+            overflow: hidden;
         }
+
+        .logo-seal img { width: 90%; height: auto; }
 
         /* --- HERO --- */
         .hero {
@@ -131,19 +128,19 @@
             border-radius: 50%;
             margin-bottom: 25px;
             border: 4px solid var(--brushed-gold);
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
-            color: #999;
-            overflow: hidden;
         }
+        
+        .leader-img-small img { width: 100%; height: 100%; object-fit: cover; }
 
         .leader-card h3 { font-size: 2rem; color: var(--accent-navy); margin-bottom: 5px; }
         .leader-card b { display: block; color: var(--brushed-gold); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 20px; }
         .leader-card p { font-size: 0.95rem; text-align: left; }
 
-        /* --- FULL BELIEFS (DYNAMIC SQUARES) --- */
+        /* --- FULL BELIEFS --- */
         .beliefs-section { background: var(--accent-navy); color: var(--pure-white); padding: 120px 8%; }
         .belief-grid {
             display: grid;
@@ -196,7 +193,7 @@
             </ul>
             
             <div class="logo-seal">
-                COPAC<br><span style="font-size: 0.5rem; letter-spacing: 1px;">THE CITY<br>OF PRAISE</span>
+                <img src="copac-main-seal.png" alt="COPAC Logo">
             </div>
 
             <ul class="nav-links right">
@@ -215,14 +212,18 @@
     <section class="leadership-section" id="leadership">
         <div class="leader-row">
             <div class="leader-card">
-                <div class="leader-img-small">LOGO</div>
+                <div class="leader-img-small">
+                    <img src="bishop-charlot-portrait.jpg" alt="Bishop J. D. Charlot, Sr.">
+                </div>
                 <b>Founder & Pastor</b>
                 <h3>Bishop J. D. Charlot, Sr.</h3>
                 <p>Bishop J. D. Charlot, Sr. is the Founder and Pastor of City of Praise Apostolic Church Ministries and has been preaching the Gospel since the age of five, answering an early and enduring call to ministry. He serves faithfully alongside his wife and partner in life and ministry, Lady Latosha Charlot, and is the proud father of two children. Bishop Charlot holds a Bachelor of Science in Organizational Leadership from Texas A&M University–Commerce and is currently pursuing the Master of Divinity degree at Duke University. Rooted in the Apostolic and Pentecostal tradition, his ministry emphasizes sound doctrine, Spirit-led worship, intentional discipleship, and community impact, with a heart to glorify God while equipping believers to live out their faith with purpose and integrity.</p>
             </div>
 
             <div class="leader-card">
-                <div class="leader-img-small">LOGO</div>
+                <div class="leader-img-small">
+                    <img src="lady-latosha-portrait.jpg" alt="Lady Latosha Charlot">
+                </div>
                 <b>Executive Pastor</b>
                 <h3>Lady Latosha Charlot</h3>
                 <p>Lady Latosha Charlot is a fourth-generation Pentecostal preacher, prophetess, and devoted servant of God, known for her passion for holy living and Spirit-led ministry. She serves faithfully alongside her husband, Bishop J. D. Charlot, Sr., as his wife and partner in life and ministry, and is a doting and intentional mother. Lady Charlot holds a Bachelor’s degree in Health Administration, bringing both compassion and practical insight to her work. With a heart for the underserved and marginalized, her ministry is marked by prophetic clarity, pastoral sensitivity, and a deep commitment to empowering individuals and families to walk in wholeness, dignity, and purpose through Christ.</p>
@@ -270,47 +271,4 @@
                 <span class="scripture">James 5:16, 2 Chronicles 7:14</span>
             </div>
 
-            <div class="belief-item">
-                <h3>Headcoverings</h3>
-                <p>Following 1 Corinthians 11 as a sign of spiritual order, we acknowledge the biblical significance of this practice. However, we leave the observation to the personal conviction of the individual believer.</p>
-                <span class="scripture">1 Corinthians 11:1-16</span>
-            </div>
-
-            <div class="belief-item">
-                <h3>Holy Living</h3>
-                <p>A heart-felt desire to reflect the character of Christ. We are called to be set apart in our conduct, our dress, and our spirits for His glory.</p>
-                <span class="scripture">Hebrews 12:14, 1 Peter 1:16</span>
-            </div>
-
-        </div>
-    </section>
-
-    <section class="gather-section" id="gathering">
-        <div>
-            <h2 style="font-size: 2.5rem; color: var(--accent-navy); margin-bottom: 20px;">Join The Gathering</h2>
-            <p style="font-family:'Lora'; font-style:italic; font-size:1.4rem; color:var(--brushed-gold); margin-bottom:20px;">"And there was Joy in the City!"</p>
-            <p style="margin-bottom: 30px;">"Walking, Leaping, and Praising God!" Join us as we build a kingdom community focused on authenticity and restoration.</p>
-            <div style="border-left: 4px solid var(--brushed-gold); padding-left: 20px;">
-                <b>Monthly In-Person:</b> Sundays [DATE TBD]<br>
-                <b>Weekly Teleconference:</b> Thursdays @ 8:00 PM CST
-            </div>
-        </div>
-        <div class="reg-form">
-            <h3 style="color: var(--accent-navy);">Teleconference Invite</h3>
-            <p style="margin-bottom: 20px; font-size: 0.9rem; color: #666;">Register to receive weekly dial-in credentials.</p>
-            <form>
-                <input type="text" placeholder="Full Name" required>
-                <input type="email" placeholder="Email Address" required>
-                <button type="submit">Send My Invitation</button>
-            </form>
-        </div>
-    </section>
-
-    <footer>
-        <h2 style="color: var(--accent-navy); margin-bottom: 10px;">COPAC</h2>
-        <p>The City of Praise Apostolic Church Ministries, Inc.</p>
-        <p style="margin-top: 30px; font-size: 0.75rem; opacity: 0.5;">Led by Bishop J. D. Charlot, Sr. | A Kingdom Community | &copy; 2026</p>
-    </footer>
-
-</body>
-</html>
+            <div
