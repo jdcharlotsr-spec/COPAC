@@ -1,78 +1,305 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The City of Praise | Bishop J. D. Charlot, Sr.</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Lora:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --navy: #0A192F;
-            --gold: #C5A021;
-            --ivory: #FDFCFB;
-            --white: #FFFFFF;
-            --glass: rgba(255, 255, 255, 0.95);
-            --shadow-regal: 0 20px 50px rgba(10, 25, 47, 0.1);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insight Apostolic Ministries Church</title>
+<style>
+  /* Basic Reset & Typography */
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+  
+  /* Refined Color Palette - Burgundy, Beige, Gold */
+  :root { 
+    --burgundy: #722F37; 
+    --burgundy-dark: #4A1C24; 
+    --gold: #d4af37;   
+    --beige: #f5f5dc;  
+    --light: #ffffff; 
+    --dark-grey: #333333; 
+  }
+  
+  body { background-color: var(--beige); color: var(--dark-grey); overflow-x: hidden; }
+  a { text-decoration: none; color: inherit; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+  /* Header & Navigation */
+  header { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; background: var(--light); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+  .logo-area { display: flex; align-items: center; gap: 15px; font-weight: 800; font-size: 1.2rem; letter-spacing: 1px; color: var(--burgundy); }
+  .church-logo { height: 45px; width: auto; object-fit: contain; border-radius: 4px; }
+  
+  nav ul { list-style: none; display: flex; gap: 20px; }
+  nav a { font-weight: 600; text-transform: uppercase; font-size: 0.85rem; transition: color 0.3s ease; }
+  nav a:hover { color: var(--gold); }
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--ivory);
-            color: var(--navy);
-            line-height: 1.8;
-        }
+  /* Buttons */
+  .btn { 
+    background: var(--gold); 
+    color: var(--burgundy); 
+    padding: 15px 35px; 
+    border: none; 
+    border-radius: 30px; 
+    font-size: 1rem; 
+    font-weight: bold; 
+    cursor: pointer; 
+    display: inline-block; 
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; 
+  }
+  .btn:hover { background: #b5952f; transform: scale(1.05); box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); }
 
-        h1, h2, h3 { font-family: 'Cinzel', serif; }
+  /* =========================================
+     PARALLAX & MASKING ENGINE
+     ========================================= */
+  .section-wrapper { 
+    position: relative; 
+    width: 100%; 
+    overflow: hidden; 
+  }
 
-        /* --- SYMMETRICAL SPLIT NAV --- */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 100px;
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            display: flex;
-            justify-content: center;
-            border-bottom: 1px solid rgba(197, 160, 33, 0.3);
-        }
+  .parallax-bg {
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+  }
 
-        .nav-wrap {
-            width: 90%;
-            max-width: 1400px;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-        }
+  /* Parallax Background Images for each section */
+  .bg-hero { background-image: linear-gradient(to right, rgba(114, 47, 55, 0.95), rgba(114, 47, 55, 0.6)), url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); color: var(--light); }
+  .bg-about { background-image: linear-gradient(rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95)), url('https://images.unsplash.com/photo-1438283173091-5dbf5c5a3206?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); color: var(--dark-grey); }
+  .bg-features { background-image: linear-gradient(rgba(245, 245, 220, 0.95), rgba(245, 245, 220, 0.95)), url('https://images.unsplash.com/photo-1504052434569-70ad5836ab65?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); color: var(--dark-grey); }
+  .bg-connect { background-image: linear-gradient(rgba(114, 47, 55, 0.92), rgba(114, 47, 55, 0.92)), url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'); color: var(--light); }
 
-        .nav-links { list-style: none; display: flex; gap: 40px; }
-        .nav-links.left { justify-content: flex-end; padding-right: 80px; }
-        .nav-links.right { justify-content: flex-start; padding-left: 80px; }
+  /* Dynamic Wave Divider positioned at the bottom of sections */
+  .parallax-wave-bottom {
+    position: absolute;
+    bottom: -1px; 
+    left: 0;
+    width: 100%;
+    height: 90px;
+    z-index: 5;
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+  }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--navy);
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            position: relative;
-            transition: 0.3s;
-        }
+  /* SVG Shapes mapped via CSS Masks */
+  .mask-1 { 
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='black'/%3E%3C/svg%3E"); 
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='black'/%3E%3C/svg%3E"); 
+  }
+  .mask-2 { 
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V120H0Z' fill='black'/%3E%3C/svg%3E"); 
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V120H0Z' fill='black'/%3E%3C/svg%3E"); 
+  }
+  .mask-3 { 
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V120H0Z' fill='black'/%3E%3C/svg%3E"); 
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V120H0Z' fill='black'/%3E%3C/svg%3E"); 
+  }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: var(--gold);
-            transition: 0.3s;
-        }
+  /* =========================================
+     CONTENT SPACING & CONTAINERS
+     ========================================= */
+  .hero-content { position: relative; z-index: 10; padding: 140px 5% 180px; text-align: center; }
+  .hero-content h1 { font-size: 4rem; margin-bottom: 10px; font-weight: 800; letter-spacing: 2px; color: var(--gold); }
+  .hero-content p.motto { font-size: 1.5rem; margin-bottom: 10px; font-weight: 500; font-style: italic; }
+  .hero-content p.scripture { font-size: 1.1rem; margin-bottom: 30px; font-weight: 400; letter-spacing: 1px; color: #ddd; }
+
+  .about-content { position: relative; z-index: 10; padding: 80px 5% 150px; text-align: center; }
+  .about-grid { display: flex; gap: 30px; max-width: 1400px; margin: auto; flex-wrap: wrap; justify-content: center; }
+  .about-card { flex: 1; min-width: 280px; padding: 35px 30px; background: var(--beige); border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: left; transition: transform 0.3s ease; border: 1px solid rgba(114, 47, 55, 0.1); }
+  .about-card:hover { transform: translateY(-8px); border: 1px solid var(--burgundy); box-shadow: 0 10px 25px rgba(114, 47, 55, 0.1); }
+  .about-card h3 { color: var(--burgundy); margin-bottom: 15px; font-size: 1.3rem; border-bottom: 2px solid var(--gold); padding-bottom: 10px; display: inline-block;}
+  .about-card p { line-height: 1.6; font-size: 0.95rem; }
+
+  .features-content { position: relative; z-index: 10; padding: 80px 5% 160px; }
+  .container { display: flex; gap: 25px; max-width: 1400px; margin: auto; flex-wrap: wrap; }
+  .col { flex: 1; min-width: 260px; background: var(--light); padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid transparent; }
+  .col:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); border: 1px solid var(--burgundy); }
+  .col h3 { margin-bottom: 20px; font-size: 1.1rem; text-transform: uppercase; display: flex; align-items: center; gap: 10px; color: var(--burgundy); }
+  
+  .img-placeholder { width: 100%; height: 180px; background: #ddd; margin-bottom: 15px; border-radius: 12px; object-fit: cover; }
+  .video-placeholder { background: var(--burgundy); height: 180px; display: flex; align-items: center; justify-content: center; color: var(--light); margin-bottom: 15px; border-radius: 12px; cursor: pointer; transition: background 0.3s ease;}
+  .video-placeholder:hover { background: var(--burgundy-dark); }
+  .play-btn { width: 50px; height: 50px; border: 3px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.3s ease; }
+  .video-placeholder:hover .play-btn { transform: scale(1.1); background: rgba(212, 175, 55, 0.2); }
+  .play-btn::after { content: ''; border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 15px solid var(--gold); margin-left: 5px; }
+
+  .event-list { list-style: none; }
+  .event-list li { padding: 10px 12px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; border-radius: 8px; transition: background 0.2s ease; font-size: 0.9rem;}
+  .event-list li:hover { background: var(--beige); cursor: pointer; }
+  .event-date { font-weight: bold; color: var(--gold); }
+
+  .connect-content { position: relative; z-index: 10; padding: 120px 5% 100px; text-align: center; }
+  .connect-content h2 { color: var(--gold); font-size: 2rem; margin-bottom: 20px; letter-spacing: 1px; }
+  .social-links { margin-bottom: 40px; }
+  .social-links a { display: inline-block; margin: 10px 15px; font-weight: bold; color: var(--light); font-size: 1.1rem; padding: 10px 25px; border: 2px solid var(--gold); border-radius: 30px; transition: all 0.3s ease; }
+  .social-links a:hover { background: var(--gold); color: var(--burgundy); transform: scale(1.05); }
+  .bible-study-box { background: rgba(255, 255, 255, 0.05); padding: 40px 30px; border-radius: 16px; max-width: 800px; margin: auto; border: 1px solid rgba(212, 175, 55, 0.3); backdrop-filter: blur(5px);}
+  .bible-study-box h3 { color: var(--gold); font-size: 1.5rem; margin-bottom: 15px; }
+  .bible-study-box p { font-size: 1rem; line-height: 1.6; margin-bottom: 25px; color: #fdfdfd; }
+
+  /* Footer Section */
+  footer { background: var(--burgundy-dark); color: var(--light); padding: 60px 5% 50px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px; position: relative; }
+  .footer-col { flex: 1; min-width: 200px; }
+  .footer-col h4 { margin-bottom: 15px; font-size: 1.1rem; color: var(--gold); }
+  
+  .newsletter { display: flex; margin-top: 15px; }
+  .newsletter input { padding: 12px; width: 70%; border: none; outline: none; border-radius: 8px 0 0 8px; }
+  .newsletter button { padding: 12px; background: var(--gold); color: var(--burgundy); border: none; font-weight: bold; cursor: pointer; width: 30%; border-radius: 0 8px 8px 0; transition: background 0.3s ease;}
+  .newsletter button:hover { background: #b5952f; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-area">
+    <img src="your-logo-file.png" alt="The IAM Church Logo" class="church-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+    <span style="display:none;">THE IAM CHURCH</span>
+    THE IAM CHURCH
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Our Beliefs</a></li>
+      <li><a href="#">Ministries</a></li>
+      <li><a href="#">Sermons</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Connect</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="section-wrapper parallax-bg bg-hero">
+  <div class="hero-content">
+    <h1>WELCOME HOME.</h1>
+    <p class="motto">"Discover Your Purpose, Pursue Your Passion and Raise the Praise!"</p>
+    <p class="scripture">Ephesians 1:18</p>
+    <a href="#" class="btn">VISIT US THIS SUNDAY</a>
+  </div>
+  <div class="parallax-wave-bottom parallax-bg bg-about mask-1"></div>
+</section>
+
+<section class="section-wrapper parallax-bg bg-about">
+  <div class="about-content">
+    <div class="about-grid">
+      <div class="about-card">
+        <h3>OUR MISSION</h3>
+        <p>To reach the lost, empower the believer, and build a community anchored in the unconditional love of Jesus Christ.</p>
+      </div>
+      <div class="about-card">
+        <h3>OUR VISION</h3>
+        <p>A city transformed by the power of the Holy Ghost, where every individual discovers their divine purpose and walks in their God-given destiny.</p>
+      </div>
+      <div class="about-card">
+        <h3>WHAT IS APOSTOLIC?</h3>
+        <p>To be Apostolic means we are built upon the foundation of the early church described in the Book of Acts. We embrace the life-changing power of the Holy Spirit, the beauty of authentic worship, and the truth of the Word of God. At The IAM Church, our Apostolic identity fuels our distinctive call to help you discover your divine purpose, pursue your God-given passion, and raise the praise in your everyday life.</p>
+      </div>
+    </div>
+  </div>
+  <div class="parallax-wave-bottom parallax-bg bg-features mask-2"></div>
+</section>
+
+<section class="section-wrapper parallax-bg bg-features">
+  <div class="features-content">
+    <div class="container">
+      <div class="col">
+        <h3>OUR LEADERS</h3>
+        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="img-placeholder" alt="Bishop and Elect-Lady">
+        <h4 style="color: var(--burgundy); font-size: 1.1rem; margin-bottom: 5px;">Bishop J. D. & Elect-Lady Latasha Charlot</h4>
+        <p style="font-size: 0.85rem; color: var(--gold); font-weight:bold; text-transform:uppercase;">Pastoral Team</p>
+        <p style="font-size: 0.85rem; margin-top: 10px; line-height: 1.4;">Guided by a vision to see every soul thrive in their divine calling.</p>
+      </div>
+      <div class="col">
+        <h3>OUR MINISTRIES</h3>
+        <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="img-placeholder" alt="Church Community">
+        <div style="display:flex; justify-content:space-between; margin-top:15px; font-weight:bold;">
+            <p style="cursor:pointer; color: var(--burgundy);">YOUTH <span style="font-weight:normal; font-size:0.8rem; color:#888;">LEARN MORE ></span></p>
+            <p style="cursor:pointer; color: var(--burgundy);">FAMILY <span style="font-weight:normal; font-size:0.8rem; color:#888;">LEARN MORE ></span></p>
+        </div>
+      </div>
+      <div class="col">
+        <h3>LATEST SERMONS</h3>
+        <div class="video-placeholder" id="playSermonBtn">
+          <div class="play-btn"></div>
+        </div>
+        <h4 style="margin: 10px 0; color: var(--burgundy);">WALKING IN PURPOSE</h4>
+        <p style="font-size: 0.85rem; color: var(--gold); font-weight:bold; text-transform:uppercase; cursor:pointer;">Full Media Archive ></p>
+      </div>
+      <div class="col">
+        <h3>UPCOMING EVENTS</h3>
+        <ul class="event-list">
+          <li><span class="event-date">APR 14</span> Praise Night</li>
+          <li><span class="event-date">APR 21</span> Community Food Drive</li>
+          <li><span class="event-date">APR 28</span> Youth Rally</li>
+          <li><span class="event-date">MAY 05</span> Sunday Service</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="parallax-wave-bottom parallax-bg bg-connect mask-3"></div>
+</section>
+
+<section class="section-wrapper parallax-bg bg-connect">
+  <div class="connect-content">
+    <h2>CONNECT WITH US</h2>
+    <div class="social-links">
+      <a href="#" target="_blank">Facebook</a>
+      <a href="#" target="_blank">Instagram</a>
+      <a href="#" target="_blank">YouTube</a>
+    </div>
+    <div class="bible-study-box">
+      <h3>Register for Virtual Bible Study</h3>
+      <p>Join us on Tuesdays at 7:30 pm. We require free registration to filter out hackers and hecklers so that the Word of God may go forth with minimal distraction.</p>
+      <a href="#" class="btn" style="background: var(--light); color: var(--burgundy);">REGISTER NOW</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-col" style="flex: 2;">
+    <h4>STAY UPDATED</h4>
+    <p style="font-size: 0.9rem;">Newcomers, leave your email to stay connected.</p>
+    <form class="newsletter" id="newsletterForm">
+      <input type="email" id="emailInput" placeholder="Email address" required>
+      <button type="submit">SUBMIT</button>
+    </form>
+  </div>
+  <div class="footer-col">
+    <h4>SERVICE TIMES</h4>
+    <p style="font-size: 0.85rem; line-height:1.6; color: var(--beige);">
+      Sundays: 3:00 pm (In Person)<br>
+      Tuesdays: 7:30 pm (Virtual)
+    </p>
+  </div>
+  <div class="footer-col">
+    <h4>CONTACT</h4>
+    <p style="font-size: 0.85rem; line-height:1.6; color: var(--beige);">
+      1234 Praise Avenue<br>
+      City, State 12345<br>
+      info@theiamchurch.com
+    </p>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const playBtn = document.getElementById('playSermonBtn');
+    playBtn.addEventListener('click', () => {
+      alert('This is where your video player modal would pop up!');
+    });
+
+    const form = document.getElementById('newsletterForm');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault(); 
+      const email = document.getElementById('emailInput').value;
+      if(email) {
+        alert(`Thank you! ${email} has been added to our connect list.`);
+        form.reset(); 
+      }
+    });
+  });
+</script>
+
+</body>
+</html>        }
 
         .nav-links a:hover::after { width: 100%; }
 
